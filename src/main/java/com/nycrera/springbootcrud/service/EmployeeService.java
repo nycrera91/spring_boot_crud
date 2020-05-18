@@ -36,7 +36,7 @@ public class EmployeeService implements IEmployeeService {
     @Transactional
     @Override
     public void save(Employee employee) {
-
+        employeeDAO.save(employee);
     }
 
     @Transactional

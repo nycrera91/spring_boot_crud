@@ -39,7 +39,8 @@ public class EmployeeDAO implements IEmployeeDAO {
 
     @Override
     public void save(Employee employee) {
-
+        Session currentSession = entityManager.unwrap(Session.class);
+        currentSession.save(employee);
     }
 
     @Override
