@@ -3,10 +3,7 @@ package com.nycrera.springbootcrud.controller;
 import com.nycrera.springbootcrud.model.Employee;
 import com.nycrera.springbootcrud.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,6 +28,31 @@ public class EmployeeController {
 
     @RequestMapping(value = "/employee", method = RequestMethod.POST)
     public Employee save(@RequestBody Employee employee) {
+        employeeService.save(employee);
+        return employee;
+    }
+
+    @RequestMapping(value = "/employee/{id}", method = RequestMethod.GET)
+    public Employee get(@PathVariable int id) {
+
+        Employee employee = employeeService.get(id);
+
+        if(employee == null) {
+            throw new RuntimeException("Employee with id " + id + " is not found!");
+        }
+
+        return employee;
+    }
+
+    @RequestMapping(value = "/employee/{id}", method = RequestMethod.DELETE)
+    public String delete(@PathVariable int id) {
+        employeeService.delete(id);
+
+        return "Employee has been deleted with id: " + id;
+    }
+
+    @RequestMapping(value = "/employee", method = RequestMethod.PUT)
+    public Employee update(@RequestBody Employee employee) {
         employeeService.save(employee);
         return employee;
     }

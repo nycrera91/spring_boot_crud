@@ -30,7 +30,7 @@ public class EmployeeService implements IEmployeeService {
     @Transactional
     @Override
     public Employee get(int id) {
-        return null;
+        return employeeDAO.get(id);
     }
 
     @Transactional
@@ -42,6 +42,6 @@ public class EmployeeService implements IEmployeeService {
     @Transactional
     @Override
     public void delete(int id) {
-
+        employeeDAO.delete(id);
     }
 }

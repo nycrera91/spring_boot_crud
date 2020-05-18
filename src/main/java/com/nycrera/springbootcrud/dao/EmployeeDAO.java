@@ -34,18 +34,23 @@ public class EmployeeDAO implements IEmployeeDAO {
 
     @Override
     public Employee get(int id) {
-        return null;
+
+        Session currentSession = entityManager.unwrap(Session.class);
+        Employee employee = currentSession.get(Employee.class, id);
+        return employee;
     }
 
     @Override
     public void save(Employee employee) {
         Session currentSession = entityManager.unwrap(Session.class);
-        currentSession.save(employee);
+        currentSession.saveOrUpdate(employee);
     }
 
     @Override
     public void delete(int id) {
-
+        Session currentSession = entityManager.unwrap(Session.class);
+        Employee employee = currentSession.get(Employee.class, id);
+        currentSession.delete(employee);
     }
 
 }
